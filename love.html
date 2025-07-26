@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>for my pretty boy</title>
+  <style>
+    body {
+      margin: 0;
+      background: #000;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      font-family: 'Courier New', monospace;
+      position: relative;
+    }
+
+    /* Fundo com corações borrados */
+    .bokeh {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      z-index: 0;
+    }
+
+    .heart-blur {
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: #ff0101;
+      transform: rotate(45deg);
+      opacity: 0.2;
+      filter: blur(12px);
+      animation: flutuar 20s linear infinite;
+    }
+
+    .heart-blur::before,
+    .heart-blur::after {
+      content: '';
+      position: absolute;
+      width: 60px;
+      height: 60px;
+      background: #ff0000;
+      border-radius: 50%;
+    }
+
+    .heart-blur::before {
+      top: -30px;
+      left: 0;
+    }
+
+    .heart-blur::after {
+      top: 0;
+      left: -30px;
+    }
+
+    @keyframes flutuar {
+      0% {
+        transform: translateY(100vh) rotate(45deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.15;
+      }
+      100% {
+        transform: translateY(-200px) rotate(45deg);
+        opacity: 0;
+      }
+    }
+
+    svg {
+      width: 300px;
+      height: 300px;
+      z-index: 2;
+    }
+
+    .path {
+      fill: transparent;
+      stroke: #ff0000;
+      stroke-width: 3;
+      stroke-dasharray: 1000;
+      stroke-dashoffset: 1000;
+      animation: draw 5s ease forwards;
+    }
+
+    .path.pintado {
+      animation: draw 5s ease forwards, fillColor 1s ease forwards 5s, pulse 1.5s ease-in-out 6s infinite;
+    }
+
+    @keyframes draw {
+      to {
+        stroke-dashoffset: 0;
+      }
+    }
+
+    @keyframes fillColor {
+      to {
+        fill: #ff0000;
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        transform: scale(1);
+      }
+      50% {
+        transform: scale(1.05);
+      }
+    }
+
+    .nome {
+      font-size: 28px;
+      margin-top: 20px;
+      color: #fff;
+      z-index: 2;
+      opacity: 0;
+      animation: aparecer 2s ease 6.5s forwards;
+    }
+
+    .frase {
+      font-size: 18px;
+      margin-top: 10px;
+      color: #ccc;
+      z-index: 2;
+      opacity: 0;
+      animation: aparecer 2s ease 8s forwards;
+    }
+
+    @keyframes aparecer {
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Fundo com corações desfocados -->
+  <div class="bokeh">
+    <div class="heart-blur" style="left: 10%; animation-delay: 0s;"></div>
+    <div class="heart-blur" style="left: 30%; animation-delay: 3s;"></div>
+    <div class="heart-blur" style="left: 50%; animation-delay: 6s;"></div>
+    <div class="heart-blur" style="left: 70%; animation-delay: 1.5s;"></div>
+    <div class="heart-blur" style="left: 90%; animation-delay: 4s;"></div>
+  </div>
+
+  <!-- Coração desenhado -->
+  <svg viewBox="0 0 100 100">
+    <path class="path pintado"
+      d="M10,30
+         A20,20 0 0,1 50,30
+         A20,20 0 0,1 90,30
+         Q90,60 50,90
+         Q10,60 10,30 Z" />
+  </svg>
+
+  <div class="nome">Julia ❤ Edson</div>
+  <div class="frase">"Portanto, o que Deus uniu, ninguém separa." - Marcos 10:9.</div>
+
+</body>
+</html>
